@@ -1,9 +1,8 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# LIBERA ACESSO DO BASE44
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,10 +15,12 @@ app.add_middleware(
 def home():
     return {"status": "online"}
 
-@app.api_route("/process", methods=["GET", "POST"])
-async def process_pdf(files: UploadFile = File(...)):
+@app.api_route("/process", methods=["GET", "POST", "PUT", "OPTIONS"])
+async def process_pdf(request: Request):
+
+    print("METHOD:", request.method)
 
     return {
-        "arquivo_recebido": files.filename,
-        "status": "backend funcionando"
+        "status": "ok",
+        "method": request.method
     }
