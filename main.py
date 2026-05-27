@@ -6,7 +6,7 @@ app = FastAPI()
 def home():
     return {"status": "online"}
 
-@app.post("/process-pdf")
+@app.post("/process")
 async def process_pdf(file: UploadFile = File(...)):
 
     return {
