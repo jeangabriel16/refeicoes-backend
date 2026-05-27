@@ -16,8 +16,8 @@ app.add_middleware(
 def home():
     return {"status": "online"}
 
-@app.api_route("/process", methods=["GET", "POST", "OPTIONS"])
-@app.api_route("/process/", methods=["GET", "POST", "OPTIONS"])
+@app.api_route("/process-pdf", methods=["GET", "POST", "OPTIONS"])
+@app.api_route("/process-pdf/", methods=["GET", "POST", "OPTIONS"])
 async def process_pdf(
     request: Request,
     files: Optional[UploadFile] = File(None)
