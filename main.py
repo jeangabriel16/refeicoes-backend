@@ -7,9 +7,9 @@ def home():
     return {"status": "online"}
 
 @app.post("/process")
-async def process_pdf(file: UploadFile = File(...)):
+async def process_pdf(files: UploadFile = File(...)):
 
     return {
-        "arquivo_recebido": file.filename,
+        "arquivo_recebido": files.filename,
         "status": "backend funcionando"
     }
