@@ -1,6 +1,5 @@
-from fastapi import FastAPI, UploadFile, File, Request
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
 
 app = FastAPI()
 
@@ -16,22 +15,10 @@ app.add_middleware(
 def home():
     return {"status": "online"}
 
-@app.api_route("/process-pdf", methods=["GET", "POST", "OPTIONS"])
-@app.api_route("/process-pdf/", methods=["GET", "POST", "OPTIONS"])
-async def process_pdf(
-    request: Request,
-    files: Optional[UploadFile] = File(None)
-):
-
-    if files:
-        return {
-            "status": "sucesso",
-            "arquivo_recebido": files.filename,
-            "method": request.method
-        }
+@app.post("/process-pdf")
+async def process_pdf_route(file: UploadFile = File(...)):
 
     return {
-        "status": "erro",
-        "mensagem": "nenhum arquivo recebido",
-        "method": request.method
+        "message": "File processed successfully",
+        "filename": file.filename
     }
