@@ -1,5 +1,3 @@
-print("VERSAO NOVA PROCESS-PDF")
-
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -18,9 +16,8 @@ def home():
     return {"status": "online"}
 
 @app.post("/process-pdf")
-async def process_pdf_route(file: UploadFile = File(...)):
-
+async def process_pdf(file: UploadFile = File(...)):
     return {
-        "message": "File processed successfully",
+        "status": "ok",
         "filename": file.filename
     }
